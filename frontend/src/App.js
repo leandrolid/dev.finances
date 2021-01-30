@@ -1,23 +1,24 @@
-import './App.css';
+import React from 'react'
+
+import './App.css'
+import Routes from './routes'
+
+import logo from './assets/money.svg'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="container">
+      <header className="header">
+        <img className="logo" alt="dev.finances" src={logo}/>
+        <h1>dev.finances</h1>
       </header>
+      <section className="content" >
+        <Routes />
+        
+      </section>
+      
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -16,6 +16,6 @@ routes.post('/inflow', InflowController.store);
 routes.get('/outflow', OutflowController.index);
 routes.post('/outflow', OutflowController.store);
 
-routes.get('/balance', BalanceController.show);
+routes.get('/dashboard', BalanceController.show);
 
 module.exports = routes;

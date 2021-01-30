@@ -22,7 +22,9 @@ module.exports = {
         return response.json({
             total_inflow,
             total_outflow,
-            total_balance
+            total_balance,
+            income,
+            outcome
         }) 
     },
     
