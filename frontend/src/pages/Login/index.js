@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 
 import api from '../../services/api'
 
+import './App.css'
+import logo from '../../assets/money.svg'
+
 export default function Login({ history }){
     const [ email, setEmail ] = useState('')
 
@@ -20,23 +23,34 @@ export default function Login({ history }){
 
     return (
         <>
-            <form onSubmit={handleSubmit} >
-                <label className="label" >E-MAIL: *</label>
+            <div className="container">
+                <header id="header">
+                    <img className="logo" alt="dev.finances" src={logo}/>
+                    <h1>dev.finances</h1>
+                </header>
+                <section className="content" id="contentid">
+                    <form onSubmit={handleSubmit} >
+                        <label className="label" >E-MAIL: *</label>
 
-                <input 
-                id="email"
-                type="email"
-                placeholder="Seu melhor e-mail" 
-                data-rules="required"
-                autoFocus
-                className="input"
-                value={email}
-                onChange={ event => setEmail(event.target.value)} />
+                        <input 
+                        id="email"
+                        type="email"
+                        placeholder="Seu melhor e-mail" 
+                        data-rules="required"
+                        autoFocus
+                        className="input"
+                        value={email}
+                        onChange={ event => setEmail(event.target.value)} />
 
-                <button 
-                type="submit" 
-                className="button">Entrar</button>
-        </form>
+                        <button 
+                        type="submit" 
+                        className="button">Entrar</button>
+                    </form>
+                    
+                </section>
+            
+            </div>
+            
         </>
     )
 }
