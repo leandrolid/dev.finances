@@ -2,12 +2,30 @@ import React, { useEffect, useState } from 'react';
 
 import './style.css'
 import logo from '../../assets/money-white.svg'
+import add from '../../assets/add-button.svg'
+import remove from '../../assets/remove-button.svg'
+import coin from '../../assets/coin.svg'
 
 import api from '../../services/api';
 //import DataTable from './table';
 import EnhancedTable from './tableDense';
+//import Transactions from '../Transactions/index'
 
-export default function Dashboard(){
+
+
+
+export default function Dashboard({ history }){
+
+    async function submitIncome(event){
+        //event.preventDefault()
+    
+        //const response = await api.post('/sessions', { email })
+  
+        history.push('/inflow')
+    }
+
+
+
     // eslint-disable-next-line
     const [ incomes, setIncomes ] = useState([])
     // eslint-disable-next-line
@@ -53,6 +71,8 @@ export default function Dashboard(){
         loadOutflows()
     }, [])
 
+    //async function handleAdd(event){ event.preventDefault()}
+
 
     return (
         <>        
@@ -68,17 +88,30 @@ export default function Dashboard(){
                         <div className="totals" >                            
 
                             <div className="balance-item" >
-                                <h2>Entradas</h2>
+                                <div className="item-header" >
+                                    <h2>Entradas</h2>
+                                    <img alt="Adicionar Receita" 
+                                    src={add} 
+                                    className="buttons"
+                                    onClick={submitIncome}                                 
+                                    />
+                                </div>
                                 <p>R$ {balances.total_inflow},00</p>
                             </div>
 
                             <div className="balance-item" >
-                                <h2>Saídas</h2>
+                                <div className="item-header" >
+                                    <h2>Saídas</h2>
+                                    <img alt="Adicionar Despesa" src={remove} className="buttons" />
+                                </div>
                                 <p>R$ {balances.total_outflow},00</p>
                             </div>
 
                             <div className="balance-item balance-total" >
-                                <h2>Total</h2>
+                                <div className="item-header" >
+                                    <h2>Total</h2>
+                                    <img alt="Balanço" src={coin} className="buttons button-total" />
+                                </div>
                                 <p>R$ {balances.total_balance},00</p>
                             </div>
                         </div>
@@ -86,10 +119,10 @@ export default function Dashboard(){
 
                     <EnhancedTable/>
                     
-
                     
                 </div>
-            </main>            
+            </main>
+        
         </>
     )
 }

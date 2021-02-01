@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
+//import { lighten, makeStyles } from '@material-ui/core/styles';
+import { Table, TableBody, TableCell, TableContainer, TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper,
+  IconButton,
+  Tooltip,
+  lighten, makeStyles } from '@material-ui/core/';
+//import TableBody from '@material-ui/core/TableBody';
+//import TableCell from '@material-ui/core/TableCell';
+//import TableContainer from '@material-ui/core/TableContainer';
+//import TableHead from '@material-ui/core/TableHead';
+//import TablePagination from '@material-ui/core/TablePagination';
+//import TableRow from '@material-ui/core/TableRow';
+//import TableSortLabel from '@material-ui/core/TableSortLabel';
+//import Toolbar from '@material-ui/core/Toolbar';
+//import Typography from '@material-ui/core/Typography';
+//import Paper from '@material-ui/core/Paper';
+//import IconButton from '@material-ui/core/IconButton';
+//import Tooltip from '@material-ui/core/Tooltip';
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -195,14 +204,14 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
   lines: {
-    backgroundColor: "#ecececf5",
+    backgroundColor: '#f9f9f9', 
+    borderRadius: 5,  
   },
   tableHeader:{
     backgroundColor: '#ffffff'
   },
   align: {
     textAlign:'left',
-    borderSpacing: '10px',
   },
   outflows: {
     textAlign:'left',
@@ -216,7 +225,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:'Roboto',
     fontWeight: 'bold',
   },
-
 
 }));
 
@@ -257,11 +265,11 @@ export default function EnhancedTable() {
 
 
   const classes = useStyles();
-  const [order, setOrder] = React.useState('desc'); //asc
-  const [orderBy, setOrderBy] = React.useState('date');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [order, setOrder] = useState('desc'); //asc
+  const [orderBy, setOrderBy] = useState('date');
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -324,6 +332,8 @@ export default function EnhancedTable() {
             id="data-table"
             aria-labelledby="tableTitle"
             aria-label="enhanced table"
+
+            
           >
             <EnhancedTableHead
               classes={classes}
@@ -352,13 +362,16 @@ export default function EnhancedTable() {
                       tabIndex={-1}
                       key={allvalue._id}
                       selected={isItemSelected}
-                      className={classes.align}
+                      className={classes.lines}
+
+                      
                     >
                       
                       <TableCell 
                         component="th" id={labelId} 
                         scope="row" 
                         padding="default"
+                        className={classes.align}
                         >
                         {allvalue.description}
                       </TableCell>
