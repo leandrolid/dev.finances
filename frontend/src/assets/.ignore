@@ -1,0 +1,89 @@
+<table className="data-table" id="transactionsTable" >
+                        <thead>
+                            <tr className="lines" >
+                                <th >Descrição</th>
+                                <th >Valor</th>
+                                <th >Data</th>
+                            </tr>
+                        </thead>
+                        <tbody className="tableBody" >
+                            {incomes.map(income => (
+                                <tr key={income._id} className="lines">
+                                    <td>{income.description}</td>
+                                    <td className="incomes" >R$ {income.price.toFixed(2).replace(".", ",")}</td>
+                                    <td>{income.date}</td>
+
+                                </tr>
+                            ))}
+                            {outcomes.map(outcome => (
+                                <tr key={outcome._id} className="lines">
+                                    <td>{outcome.description}</td>
+                                    <td className="outcomes">- R$ {outcome.price.toFixed(2).replace(".", ",")}</td>
+                                    <td>{outcome.date}</td>
+
+                                </tr>
+                            ))}
+                            {incomes.map(income => (
+                                <tr key={income._id} className="lines">
+                                    <td>{income.description}</td>
+                                    <td className="incomes" >R$ {income.price.toFixed(2).replace(".", ",")}</td>
+                                    <td>{income.date}</td>
+
+                                </tr>
+                            ))}
+                            {outcomes.map(outcome => (
+                                <tr key={outcome._id} className="lines">
+                                    <td>{outcome.description}</td>
+                                    <td className="outcomes">- R$ {outcome.price.toFixed(2).replace(".", ",")}</td>
+                                    <td>{outcome.date}</td>
+
+                                </tr>
+                            ))}
+                            {incomes.map(income => (
+                                <tr key={income._id} className="lines">
+                                    <td>{income.description}</td>
+                                    <td className="incomes" >R$ {income.price.toFixed(2).replace(".", ",")}</td>
+                                    <td>{income.date}</td>
+
+                                </tr>
+                            ))}
+                            {outcomes.map(outcome => (
+                                <tr key={outcome._id} className="lines">
+                                    <td>{outcome.description}</td>
+                                    <td className="outcomes">- R$ {outcome.price.toFixed(2).replace(".", ",")}</td>
+                                    <td>{outcome.date}</td>
+
+                                </tr>
+                            ))}
+                            
+                        </tbody>
+                    </table> 
+
+
+
+
+
+
+
+<script src="https://mottie.github.io/tablesorter/docs/js/jquery-latest.min.js"></script>
+    <script async src="https://mottie.github.io/tablesorter/docs/js/jquery-migrate-3.1.0.min.js"></script>
+    <script async src="https://mottie.github.io/tablesorter/docs/js/jquery-ui.min.js"></script>
+    <script async src="https://mottie.github.io/tablesorter/docs/js/prettify.js"></script>
+    <script async src="https://mottie.github.io/tablesorter/docs/js/docs.js"></script>
+    <script async src="https://mottie.github.io/tablesorter/docs/js/search.js"></script>
+    
+
+    
+    <script src="https://mottie.github.io/tablesorter/js/jquery.tablesorter.combined.js"></script>
+    <script async>
+      {$.extend( $.tablesorter.defaults, {
+        theme: 'blue',
+        widthFixed: true
+      })}
+
+      {$('#transactionsTable').tablesorter({widgets:['zebra']})}
+      {setTimeout(function(){
+        $('.compatibility').tablesorter();
+        $('table.options, table.api').tablesorter({widgets:['stickyHeaders']});
+      }, 1000)}
+      </script>

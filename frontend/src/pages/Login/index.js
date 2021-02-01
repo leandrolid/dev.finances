@@ -24,30 +24,32 @@ export default function Login({ history }){
     return (
         <>
             <div className="container">
-                <header id="header">
-                    <img className="logo" alt="dev.finances" src={logo}/>
-                    <h1>dev.finances</h1>
-                </header>
-                <section className="content" id="contentid">
-                    <form onSubmit={handleSubmit} >
-                        <label className="label" >E-MAIL: *</label>
+                <div className="inner">
+                    <header id="header">
+                        <img className="logo" alt="dev.finances" src={logo}/>
+                        <h1>dev.finances</h1>
+                    </header>
+                    <section className="content">
+                        <form onSubmit={handleSubmit} >
+                            <label className="label" >E-MAIL: *</label>
 
-                        <input 
-                        id="email"
-                        type="email"
-                        placeholder="Seu melhor e-mail" 
-                        data-rules="required"
-                        autoFocus
-                        className="input"
-                        value={email}
-                        onChange={ event => setEmail(event.target.value)} />
+                            <input 
+                            id="email"
+                            type="email"
+                            placeholder="Seu melhor e-mail" 
+                            data-rules="required"
+                            autoFocus
+                            className="input"
+                            value={email}
+                            onChange={ event => setEmail(event.target.value)} />
 
-                        <button 
-                        type="submit" 
-                        className="button">Entrar</button>
-                    </form>
-                    
-                </section>
+                            <button 
+                            type="submit" 
+                            className="button">Entrar</button>
+                        </form>
+                        
+                    </section>
+                </div>
             
             </div>
             

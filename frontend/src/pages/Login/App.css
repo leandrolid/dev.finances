@@ -12,7 +12,8 @@ html, body, #root {
 }
 
 body {
-  background: rgb(39, 40, 61) url('../../assets/home-background.jpeg') no-repeat;
+  background: rgb(19, 36, 19) url('../../assets/home-background.jpeg') no-repeat fixed;
+  background-position: center;
   background-size: cover;
   -webkit-font-smoothing: antialiased !important;
 }
@@ -23,15 +24,22 @@ body, input, button {
 }
 
 .container{
-  margin: 100px auto;
-  max-width: 450px;
-  width: 95%;
-  background-color: rgb(246, 248, 250);
-  border-radius: 2px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.inner {
+  margin: 100px auto;
+  max-width: 450px;
+  width: 95%;
+  background-color: rgb(231, 240, 231);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -50px;
+
 }
 
 header {
