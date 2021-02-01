@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-//import { lighten, makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableCell, TableContainer, TableHead,
   TablePagination,
   TableRow,
@@ -12,6 +11,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead,
   IconButton,
   Tooltip,
   lighten, makeStyles } from '@material-ui/core/';
+import DeleteIcon from '@material-ui/icons/Delete';
+//import { lighten, makeStyles } from '@material-ui/core/styles';
 //import TableBody from '@material-ui/core/TableBody';
 //import TableCell from '@material-ui/core/TableCell';
 //import TableContainer from '@material-ui/core/TableContainer';
@@ -26,10 +27,9 @@ import { Table, TableBody, TableCell, TableContainer, TableHead,
 //import Tooltip from '@material-ui/core/Tooltip';
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
 // import FilterListIcon from '@material-ui/icons/FilterList';
-
 //import './tableStyle.css'
+
 import api from '../../services/api';
 
 
