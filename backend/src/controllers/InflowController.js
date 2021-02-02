@@ -11,7 +11,7 @@ module.exports = {
     async store(request, response) {
 
         const { description, price } = request.body;
-        let { user_id } = request.headers;
+        const { user_id } = request.headers;
 
         let data = await new Date();
 
@@ -20,11 +20,14 @@ module.exports = {
         let ano4    = data.getFullYear(); // 4 dígitos
         let date = dia + '/' + mes + '/' + ano4;
 
+        const type = true;
+
         const inflow = await Inflow.create({
             user: user_id,
             description,
             price,
-            date
+            date,
+            type
         })
     
 

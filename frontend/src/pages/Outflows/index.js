@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { createHashHistory } from 'history'
 
 import api from '../../services/api'
 
 import './style.css'
 import logo from '../../assets/money.svg'
-
-export const history = createHashHistory()
 
 export default function Inflows(){
 
@@ -19,7 +16,7 @@ export default function Inflows(){
         const user_id = localStorage.getItem('user')
 
         //const response = 
-        await api.post('/inflow', { price, description }, { headers: { user_id } })
+        await api.post('/outflow', { price, description }, { headers: { user_id } })
 
 
 
@@ -41,7 +38,7 @@ export default function Inflows(){
                 <div className="inner">
                     <header id="header">
                         <img className="logo" alt="dev.finances" src={logo}/>
-                        <h1>Adicionar Receita</h1>
+                        <h1>Adicionar Despesa</h1>
                     </header>
                     <section className="content">
                         <form onSubmit={handleSubmit} >
@@ -50,7 +47,7 @@ export default function Inflows(){
                             <input 
                             id="description"
                             type="text"
-                            placeholder="Descrição da receita" 
+                            placeholder="Descrição da despesa" 
                             //data-rules="required"
                             autoFocus
                             required={true}

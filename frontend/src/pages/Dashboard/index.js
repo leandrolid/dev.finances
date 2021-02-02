@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
 
 import './style.css'
 import logo from '../../assets/money-white.svg'
@@ -7,8 +8,10 @@ import remove from '../../assets/remove-button.svg'
 import coin from '../../assets/coin.svg'
 
 import api from '../../services/api';
+import EnhancedTable from '../Table/tableDense';
+import Inflows from '../Inflows/index';
+import Outflows from '../Outflows/index';
 //import DataTable from './table';
-import EnhancedTable from './tableDense';
 //import Transactions from '../Transactions/index'
 
 
@@ -16,13 +19,16 @@ import EnhancedTable from './tableDense';
 
 export default function Dashboard({ history }){
 
-    async function submitIncome(event){
+    //async function submitIncome(event){
         //event.preventDefault()
     
         //const response = await api.post('/sessions', { email })
   
-        history.push('/inflow')
-    }
+        //history.push('/inflow')
+    //}
+
+    const [ inc, setInc] = useState(false)
+    const [ out, setOut] = useState(false)
 
 
 
@@ -42,7 +48,7 @@ export default function Dashboard({ history }){
             const response = await api.get('/dashboard', { headers: { user_id } })
             setBalances(response.data);
                         
-            //console.log(response.data)            
+            //console.log(response)            
         }
         loadBalance()
     }, [])
@@ -73,6 +79,19 @@ export default function Dashboard({ history }){
 
     //async function handleAdd(event){ event.preventDefault()}
 
+    const modals = {
+        root: {
+          fontFamily: 'Roboto',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems : 'center',
+          justifyContent : 'center',
+          backgroundColor: '#000000',
+          color: '#00000080'
+        },      
+      }
+
 
     return (
         <>        
@@ -93,7 +112,9 @@ export default function Dashboard({ history }){
                                     <img alt="Adicionar Receita" 
                                     src={add} 
                                     className="buttons"
-                                    onClick={submitIncome}                                 
+                                    onClick={ () => setInc(true)
+                                        //submitIncome
+                                    }                                 
                                     />
                                 </div>
                                 <p>R$ {balances.total_inflow},00</p>
@@ -102,7 +123,11 @@ export default function Dashboard({ history }){
                             <div className="balance-item" >
                                 <div className="item-header" >
                                     <h2>Saídas</h2>
-                                    <img alt="Adicionar Despesa" src={remove} className="buttons" />
+                                    <img alt="Adicionar Despesa" 
+                                    src={remove} 
+                                    className="buttons"
+                                    onClick={ () => setOut(true)}
+                                     />
                                 </div>
                                 <p>R$ {balances.total_outflow},00</p>
                             </div>
@@ -122,7 +147,24 @@ export default function Dashboard({ history }){
                     
                 </div>
             </main>
+            <Modal 
+            isOpen={inc} 
+            className="modals"
+            animation={true}
+            >
+                <div className="modals-close"
+                onClick={ () => setInc(false)} >[X]</div>
+                <Inflows />
+            </Modal>
+
+            <Modal isOpen={out} className="modals" >
+                <div className="modals-close" 
+                onClick={ () => setOut(false)} >[X]</div>
+                <Outflows />
+            </Modal>
         
         </>
     )
 }
+
+

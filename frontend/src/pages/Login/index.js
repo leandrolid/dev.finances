@@ -38,6 +38,7 @@ export default function Login({ history }){
                             type="email"
                             placeholder="Seu melhor e-mail" 
                             data-rules="required"
+                            required={true}
                             autoFocus
                             className="input"
                             value={email}

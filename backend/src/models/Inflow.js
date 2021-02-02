@@ -8,6 +8,7 @@ const InflowSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    type: Boolean
 });
 
 module.exports = mongoose.model('Inflow', InflowSchema);

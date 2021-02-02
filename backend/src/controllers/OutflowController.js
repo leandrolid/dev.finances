@@ -20,11 +20,14 @@ module.exports = {
         let ano4    = data.getFullYear(); // 4 dígitos
         let date = dia + '/' + (mes+1) + '/' + ano4
 
+        const type = false;
+
         const outflow = await Outflow.create({
             user: user_id,
             description,
             price,
-            date
+            date,
+            type
         })
     
 
