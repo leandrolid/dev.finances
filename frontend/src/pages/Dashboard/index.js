@@ -6,6 +6,7 @@ import logo from '../../assets/money-white.svg'
 import add from '../../assets/add-button.svg'
 import remove from '../../assets/remove-button.svg'
 import coin from '../../assets/coin.svg'
+import close from '../../assets/close.svg'
 
 import api from '../../services/api';
 import EnhancedTable from '../Table/tableDense';
@@ -79,7 +80,7 @@ export default function Dashboard({ history }){
 
     //async function handleAdd(event){ event.preventDefault()}
 
-    const modals = {
+    /* const modals = {
         root: {
           fontFamily: 'Roboto',
           width: '100%',
@@ -91,6 +92,7 @@ export default function Dashboard({ history }){
           color: '#00000080'
         },      
       }
+      */
 
 
     return (
@@ -152,15 +154,24 @@ export default function Dashboard({ history }){
             className="modals"
             animation={true}
             >
-                <div className="modals-close"
-                onClick={ () => setInc(false)} >[X]</div>
-                <Inflows />
+                <div className="overlay">
+                    
+                    <img alt="Fechar" title="Fechar" src={close} className="modals-close"
+                    onClick={ () => setInc(false)} />
+
+                    <Inflows />
+                </div>
+                
             </Modal>
 
             <Modal isOpen={out} className="modals" >
-                <div className="modals-close" 
-                onClick={ () => setOut(false)} >[X]</div>
-                <Outflows />
+                <div className="overlay">
+
+                    <img alt="Fechar" title="Fechar" src={close} className="modals-close" 
+                    onClick={ () => setOut(false)} />
+
+                    <Outflows />
+                </div>
             </Modal>
         
         </>

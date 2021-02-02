@@ -1,34 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { Table, TableBody, TableCell, TableContainer, TableHead,
+import { Table, 
+  TableBody, 
+  TableCell, 
+  TableContainer, 
+  TableHead,
   TablePagination,
   TableRow,
   TableSortLabel,
   Toolbar,
   Typography,
   Paper,
-  IconButton,
-  Tooltip,
+  //IconButton,
+  //Tooltip,
   lighten, makeStyles } from '@material-ui/core/';
-import DeleteIcon from '@material-ui/icons/Delete';
-//import { lighten, makeStyles } from '@material-ui/core/styles';
-//import TableBody from '@material-ui/core/TableBody';
-//import TableCell from '@material-ui/core/TableCell';
-//import TableContainer from '@material-ui/core/TableContainer';
-//import TableHead from '@material-ui/core/TableHead';
-//import TablePagination from '@material-ui/core/TablePagination';
-//import TableRow from '@material-ui/core/TableRow';
-//import TableSortLabel from '@material-ui/core/TableSortLabel';
-//import Toolbar from '@material-ui/core/Toolbar';
-//import Typography from '@material-ui/core/Typography';
-//import Paper from '@material-ui/core/Paper';
-//import IconButton from '@material-ui/core/IconButton';
-//import Tooltip from '@material-ui/core/Tooltip';
-//import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import Switch from '@material-ui/core/Switch';
-// import FilterListIcon from '@material-ui/icons/FilterList';
-//import './tableStyle.css'
+//import DeleteIcon from '@material-ui/icons/Delete';
+
 
 import api from '../../services/api';
 
@@ -131,13 +119,11 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  // const { numSelected } = props;
 
   return (
     <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
+      className={clsx(classes.root )}
     >
       
       {
@@ -152,14 +138,6 @@ const EnhancedTableToolbar = (props) => {
           Transações
         </Typography>
 
-      
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : ( '')}
     </Toolbar>
   );
 };
@@ -225,6 +203,17 @@ const useStyles = makeStyles((theme) => ({
     fontFamily:'Roboto',
     fontWeight: 'bold',
   },
+  date: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  delete: {
+    alignSelf: 'flex-end',
+    justifySelf: 'flex-end',
+    textAlign: 'right'
+  }
+
 
 }));
 
@@ -286,6 +275,7 @@ export default function EnhancedTable() {
     setSelected([]);
   };
 
+/*
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -305,6 +295,7 @@ export default function EnhancedTable() {
 
     setSelected(newSelected);
   };
+  */
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -318,6 +309,55 @@ export default function EnhancedTable() {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   //const emptyRows = rowsPerPage - Math.min(rowsPerPage, incomes.length - page * rowsPerPage);
+
+  const [del, setDel ] = useState( {} );
+
+  async function handleDelete(event, allvalue) {
+    
+    const filter = allvalue
+    //console.log(filter)
+    
+    const added = incomes.map( (income) => { 
+      const inflow = income
+      return inflow
+      
+    })
+    
+    //console.log(added)
+    
+    const removed = outcomes.map( (outcome) => { 
+      const outflow = outcome
+      return outflow
+      
+    })
+    
+    //console.log(removed)
+
+
+
+    if ( added.indexOf(filter) > -1){ //console.log('teste 1')  
+    console.log('entrada')
+    console.log(filter)
+    
+    //await api.delete('/inflow', { filter })
+
+    //window.location.reload(false);
+  
+  } else{
+    
+    //const transaction = {transaction: del} 
+
+    console.log('saída')
+    
+
+    await api.delete('/outflow',  {del} )
+    console.log({del})
+    //window.location.reload(false);
+  }
+
+}
+
+
 
   return (
     <div className={classes.root} id="table-root" >
@@ -350,19 +390,24 @@ export default function EnhancedTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((allvalue ) => {
 
-                  const isItemSelected = isSelected(allvalue.description);
+                  const isItemSelected = isSelected(allvalue._id);
                   const labelId = allvalue._id
+
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, allvalue.description)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={allvalue._id}
                       selected={isItemSelected}
                       className={classes.lines}
+                      
+                      value={allvalue._id}
+
+                      //onClick={(event) => handleClick(event, allvalue._id)}
+                      
 
                       
                     >
@@ -379,7 +424,23 @@ export default function EnhancedTable() {
                       className={ allvalue.type ? classes.inflows : classes.outflows} >
                         { allvalue.type ? null : '-'}
                         R$ {allvalue.price},00</TableCell>
-                      <TableCell align="right" className={classes.align} >{allvalue.date}</TableCell>
+                      <TableCell align="right" className={classes.date} >
+
+                        <div className={classes.align} >{allvalue.date}</div>
+                        <form 
+                        onSubmit={(event) => handleDelete(event, allvalue)}>
+
+                          <button
+                          id={allvalue._id}
+                          onClick={ event => setDel(event.target.id) }
+                          className={classes.delete} 
+                          
+                          >[X]</button> 
+
+                        </form>
+                        
+
+                      </TableCell>
                       
                     </TableRow>
                   );

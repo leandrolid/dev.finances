@@ -34,7 +34,7 @@ export default function Inflows(){
 
     return (
         <>
-            <div className="container">
+            <div className="container container-modal">
                 <div className="inner">
                     <header id="header">
                         <img className="logo" alt="dev.finances" src={logo}/>

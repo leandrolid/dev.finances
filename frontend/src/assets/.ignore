@@ -87,3 +87,34 @@
         $('table.options, table.api').tablesorter({widgets:['stickyHeaders']});
       }, 1000)}
       </script>
+
+
+
+
+
+
+
+      allvalues.map( (allvalue) => {
+      
+      if (allvalue.type === true ){
+        const transaction = {_id }
+
+        console.log('entrada')
+
+        //const response = 
+        
+        //await api.delete('/inflow', { transaction })
+
+        // window.location.reload(false);
+      } else {
+        const transaction = {_id }
+
+        console.log('saída')
+
+        //const response = 
+        
+        //await api.delete('/outflow', { transaction })
+
+        //window.location.reload(false);
+      }
+    })

@@ -32,5 +32,17 @@ module.exports = {
     
 
         return response.json(inflow);
+    },
+
+    async destroy( request, response ){
+        let { user_id } = request.headers
+        const { transaction } = request.body;
+
+        const deletion = await Inflow.deleteOne ( transaction )
+
+        //const income = await Inflow.find({ user: user_id})
+
+        return response.json(deletion)
+
     }
 };
