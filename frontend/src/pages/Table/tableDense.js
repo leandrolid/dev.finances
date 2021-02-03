@@ -212,15 +212,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   delete: {
-    alignSelf: 'flex-end',
-    justifySelf: 'flex-end',
+    alignSelf: 'center',
+    justifySelf: 'center',
     textAlign: 'right',
     backgroundColor:' rgba(255, 255, 255, 0)',
-    border: 'none'
+    border: 'none',
+    cursor: 'pointer',
+    marginLeft: 10
   },
   transactionButton:{
-    width: 20,
-    margin: 'auto'
+    width: 15,
   }
 
 
@@ -401,7 +402,7 @@ export default function EnhancedTable() {
                         padding="default"
                         className={classes.align}
                       >
-                        {allvalue.description}
+                        {allvalue.description ? allvalue.description : 'Adicione uma nova despesa ou receita' } 
                       </TableCell>
                       <TableCell align="right"
                         className={allvalue.type ? classes.inflows : classes.outflows} >
@@ -444,6 +445,9 @@ export default function EnhancedTable() {
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
           className={classes.lines}
+          alt="Linhas"
+          value="Linhas"
+          placeholder="Linhas"
         />
       </Paper>
 

@@ -108,30 +108,33 @@ export default function Dashboard({ history }){
 
                         <div className="totals" >                            
 
-                            <div className="balance-item" >
+                            <div className="balance-item" 
+                            onClick={ () => setInc(true)
+                                //submitIncome
+                            }>
                                 <div className="item-header" >
                                     <h2>Entradas</h2>
                                     <img alt="Adicionar Receita" 
                                     src={add} 
                                     className="buttons"
-                                    onClick={ () => setInc(true)
-                                        //submitIncome
-                                    }                                 
+                                                                     
                                     />
                                 </div>
-                                <p>R$ {balances.total_inflow},00</p>
+                                <p>R$ {balances.total_inflow ? balances.total_inflow : '0'},00</p>
                             </div>
 
-                            <div className="balance-item" >
+                            <div className="balance-item"
+                            onClick={ () => setOut(true)} >
+
                                 <div className="item-header" >
                                     <h2>Saídas</h2>
                                     <img alt="Adicionar Despesa" 
                                     src={remove} 
                                     className="buttons"
-                                    onClick={ () => setOut(true)}
+                                    
                                      />
                                 </div>
-                                <p>R$ {balances.total_outflow},00</p>
+                                <p>R$ {balances.total_outflow ? balances.total_outflow : '0'},00</p>
                             </div>
 
                             <div className="balance-item balance-total" >
@@ -139,7 +142,7 @@ export default function Dashboard({ history }){
                                     <h2>Total</h2>
                                     <img alt="Balanço" src={coin} className="buttons button-total" />
                                 </div>
-                                <p>R$ {balances.total_balance},00</p>
+                                <p>R$ {balances.total_balance ? balances.total_balance : '0'},00</p>
                             </div>
                         </div>
                     </div>
