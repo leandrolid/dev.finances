@@ -26,12 +26,14 @@ export default function Inflows(){
         //console.log(response)
         //console.log(price)
         //console.log(description)
-
+        
         //history.push('/')
-
+        
     }
-
+    
     function refreshPage() {
+        //console.log(price)
+        //console.log(description)
         window.location.reload(false);
       }
 

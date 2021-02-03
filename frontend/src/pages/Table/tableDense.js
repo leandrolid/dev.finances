@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TablePagination,
   TableRow,
@@ -14,11 +15,14 @@ import { Table,
   Paper,
   //IconButton,
   //Tooltip,
-  lighten, makeStyles } from '@material-ui/core/';
+  lighten, makeStyles
+} from '@material-ui/core/';
 //import DeleteIcon from '@material-ui/icons/Delete';
 
 
 import api from '../../services/api';
+
+import transactionButton from '../../assets/transaction-button.svg'
 
 
 function descendingComparator(a, b, orderBy) {
@@ -50,7 +54,7 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'description', numeric: false, disablePadding: false, label: 'Descrição' },
   { id: 'price', numeric: true, disablePadding: false, label: 'Valores' },
-  { id: 'date', numeric: false, type: 'date' , disablePadding: false, label: 'Datas' },
+  { id: 'date', numeric: false, type: 'date', disablePadding: false, label: 'Datas' },
 ];
 
 function EnhancedTableHead(props) {
@@ -63,7 +67,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead className={classes.tableHeader} >
       <TableRow>
-        
+
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -94,7 +98,6 @@ EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -108,12 +111,12 @@ const useToolbarStyles = makeStyles((theme) => ({
     borderRadius: 5,
   },
   highlight: {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+    color: theme.palette.secondary.main,
+    backgroundColor: lighten(theme.palette.secondary.light, 0.85),
   },
   title: {
     flex: '1 1 100%',
-    fontFamily: 'Roboto',    
+    fontFamily: 'Roboto',
   },
 }));
 
@@ -123,19 +126,19 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <Toolbar
-      className={clsx(classes.root )}
+      className={clsx(classes.root)}
     >
-      
-      {
-      //numSelected > 0 ? (
-      // <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-      //    {numSelected} {numSelected === 1 ? 'transação' : 'transações'}
-      //  </Typography>
-      //) : null 
-    }
 
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Transações
+      {
+        //numSelected > 0 ? (
+        // <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+        //    {numSelected} {numSelected === 1 ? 'transação' : 'transações'}
+        //  </Typography>
+        //) : null 
+      }
+
+      <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+        Transações
         </Typography>
 
     </Toolbar>
@@ -152,8 +155,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems : 'center',
-    justifyContent : 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 50,
   },
   paper: {
@@ -182,25 +185,25 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
   lines: {
-    backgroundColor: '#f9f9f9', 
-    borderRadius: 5,  
+    backgroundColor: '#f9f9f9',
+    borderRadius: 5,
   },
-  tableHeader:{
+  tableHeader: {
     backgroundColor: '#ffffff'
   },
   align: {
-    textAlign:'left',
+    textAlign: 'left',
   },
   outflows: {
-    textAlign:'left',
+    textAlign: 'left',
     color: '#db1d1d'
   },
   inflows: {
-    textAlign:'left',
+    textAlign: 'left',
     color: '#1ba332'
   },
-  label:{
-    fontFamily:'Roboto',
+  label: {
+    fontFamily: 'Roboto',
     fontWeight: 'bold',
   },
   date: {
@@ -211,7 +214,13 @@ const useStyles = makeStyles((theme) => ({
   delete: {
     alignSelf: 'flex-end',
     justifySelf: 'flex-end',
-    textAlign: 'right'
+    textAlign: 'right',
+    backgroundColor:' rgba(255, 255, 255, 0)',
+    border: 'none'
+  },
+  transactionButton:{
+    width: 20,
+    margin: 'auto'
   }
 
 
@@ -219,43 +228,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable() {
 
-    const [ incomes, setIncomes ] = useState([])
-    const [ outcomes, setOutcomes ] = useState([])
- 
-    //console.log(incomes)
-    //console.log(outcomes)
-
-    useEffect(() => {
-        async function loadInflows(){
-            const user_id = localStorage.getItem('user')
-            const inflows = await api.get('/inflow', {
-                headers: { user_id }
-            })            
-            setIncomes(inflows.data);            
-            //console.log(Infows.data)            
-        }
-        loadInflows()
-    }, [])
-
-    useEffect(() => {
-        async function loadOutflows(){
-            const user_id = localStorage.getItem('user')
-            const outflows = await api.get('/outflow', {
-                headers: { user_id }
-            })            
-            setOutcomes(outflows.data);            
-            //console.log(outfows.data)            
-        }
-        loadOutflows()
-    }, [])
-
-    const allvalues = incomes.concat(outcomes)
-    //console.log(allvalues)
-
-
   const classes = useStyles();
   const [order, setOrder] = useState('desc'); //asc
   const [orderBy, setOrderBy] = useState('date');
+  // eslint-disable-next-line
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -265,37 +241,6 @@ export default function EnhancedTable() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = allvalues.map((n) => n._id);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-/*
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
-  };
-  */
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -310,52 +255,91 @@ export default function EnhancedTable() {
 
   //const emptyRows = rowsPerPage - Math.min(rowsPerPage, incomes.length - page * rowsPerPage);
 
-  const [del, setDel ] = useState( {} );
+  const [incomes, setIncomes] = useState([]) //console.log(incomes)
+  const [outcomes, setOutcomes] = useState([]) //console.log(outcomes)
 
+  useEffect(() => {
+    async function loadInflows() {
+      const user_id = localStorage.getItem('user')
+      const inflows = await api.get('/inflow', {
+        headers: { user_id }
+      })
+      setIncomes(inflows.data);
+      //console.log(Infows.data)            
+    }
+    loadInflows()
+  }, [])
+
+  useEffect(() => {
+    async function loadOutflows() {
+      const user_id = localStorage.getItem('user')
+      const outflows = await api.get('/outflow', {
+        headers: { user_id }
+      })
+      setOutcomes(outflows.data);
+      //console.log(outfows.data)            
+    }
+    loadOutflows()
+  }, [])
+
+  const allvalues = incomes.concat(outcomes)
+  //console.log(allvalues)
+  
+  let [transaction, setTransaction] = useState('');
+  
   async function handleDelete(event, allvalue) {
+
     
+
     const filter = allvalue
-    //console.log(filter)
+
+    let {_id } = allvalue
+
+    transaction = _id
     
-    const added = incomes.map( (income) => { 
+    console.log(transaction)
+    //console.log(filter)
+
+    const added = incomes.map((income) => {
       const inflow = income
       return inflow
-      
+
     })
-    
+
     //console.log(added)
-    
+    /*
     const removed = outcomes.map( (outcome) => { 
       const outflow = outcome
       return outflow
       
     })
-    
+    */
     //console.log(removed)
 
 
 
-    if ( added.indexOf(filter) > -1){ //console.log('teste 1')  
-    console.log('entrada')
-    console.log(filter)
+    if (added.indexOf(filter) > -1) { //console.log('teste 1')  
     
-    //await api.delete('/inflow', { filter })
-
-    //window.location.reload(false);
-  
-  } else{
+    // console.log(filter)
     
-    //const transaction = {transaction: del} 
-
-    console.log('saída')
+    await api.put('/inflow', {transaction} )
     
+    //console.log({ transaction })
+    //console.log('entrada')
+    window.location.reload(false);
 
-    await api.delete('/outflow',  {del} )
-    console.log({del})
-    //window.location.reload(false);
+    } else {
+
+      //const transaction = {transaction: transaction} 
+      
+      await api.put('/outflow', { transaction })
+      //console.log({ transaction })
+      //console.log('saída')
+      window.location.reload(false);
+    }
+
+
   }
-
-}
 
 
 
@@ -363,9 +347,9 @@ export default function EnhancedTable() {
     <div className={classes.root} id="table-root" >
       <Paper className={classes.paper}>
 
-      <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} />
 
-        
+
         <TableContainer >
           <Table
             className={classes.table}
@@ -373,14 +357,13 @@ export default function EnhancedTable() {
             aria-labelledby="tableTitle"
             aria-label="enhanced table"
 
-            
+
           >
             <EnhancedTableHead
               classes={classes}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={allvalues.length}
               className={classes.tableHeader}
@@ -388,7 +371,7 @@ export default function EnhancedTable() {
             <TableBody>
               {stableSort(allvalues, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((allvalue ) => {
+                .map((allvalue) => {
 
                   const isItemSelected = isSelected(allvalue._id);
                   const labelId = allvalue._id
@@ -403,45 +386,49 @@ export default function EnhancedTable() {
                       key={allvalue._id}
                       selected={isItemSelected}
                       className={classes.lines}
-                      
+
                       value={allvalue._id}
 
-                      //onClick={(event) => handleClick(event, allvalue._id)}
-                      
+                    //onClick={(event) => handleClick(event, allvalue._id)}
 
-                      
+
+
                     >
-                      
-                      <TableCell 
-                        component="th" id={labelId} 
-                        scope="row" 
+
+                      <TableCell
+                        component="th" id={labelId}
+                        scope="row"
                         padding="default"
                         className={classes.align}
-                        >
+                      >
                         {allvalue.description}
                       </TableCell>
-                      <TableCell align="right" 
-                      className={ allvalue.type ? classes.inflows : classes.outflows} >
-                        { allvalue.type ? null : '-'}
+                      <TableCell align="right"
+                        className={allvalue.type ? classes.inflows : classes.outflows} >
+                        {allvalue.type ? null : '-'}
                         R$ {allvalue.price},00</TableCell>
                       <TableCell align="right" className={classes.date} >
 
                         <div className={classes.align} >{allvalue.date}</div>
-                        <form 
-                        onSubmit={(event) => handleDelete(event, allvalue)}>
+                        <form
+                          onSubmit={(event) => handleDelete(event, allvalue)}>
 
                           <button
-                          id={allvalue._id}
-                          onClick={ event => setDel(event.target.id) }
-                          className={classes.delete} 
-                          
-                          >[X]</button> 
+                            id={allvalue._id}
+                            value={allvalue._id}
+                            onClick={event => setTransaction(event.target.value)}
+                            className={classes.delete}
+                          >
+                            <img src={transactionButton} 
+                            alt="Remover"
+                            className={classes.transactionButton} />
+                          </button>
 
                         </form>
-                        
+
 
                       </TableCell>
-                      
+
                     </TableRow>
                   );
                 })}
@@ -451,7 +438,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={ allvalues.length}
+          count={allvalues.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
@@ -459,7 +446,7 @@ export default function EnhancedTable() {
           className={classes.lines}
         />
       </Paper>
-      
+
     </div>
   );
 }

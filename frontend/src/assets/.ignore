@@ -118,3 +118,58 @@
         //window.location.reload(false);
       }
     })
+
+
+
+
+
+
+
+
+
+
+
+async function handleDelete(event, allvalue) {
+
+    const filter = allvalue
+    //console.log(filter)
+
+    const added = incomes.map((income) => {
+      const inflow = income
+      return inflow
+
+    })
+
+    //console.log(added)
+    /*
+    const removed = outcomes.map( (outcome) => { 
+      const outflow = outcome
+      return outflow
+      
+    })
+    */
+    //console.log(removed)
+
+
+
+    if (added.indexOf(filter) > -1) { //console.log('teste 1')  
+    
+    // console.log(filter)
+    
+    await api.delete('/inflow', {del} )
+    
+    console.log({ del })
+    console.log('entrada')
+      //window.location.reload(false);
+
+    } else {
+
+      //const transaction = {transaction: del} 
+      
+      await api.delete('/outflow', { del })
+      console.log({ del })
+      console.log('saída')
+      //window.location.reload(false);
+    }
+
+  }
