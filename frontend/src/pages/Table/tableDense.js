@@ -290,7 +290,7 @@ export default function EnhancedTable() {
   
   async function handleDelete(event, allvalue) {
 
-    
+    event.preventDefault()
 
     const filter = allvalue
 
@@ -402,7 +402,7 @@ export default function EnhancedTable() {
                         padding="default"
                         className={classes.align}
                       >
-                        {allvalue.description ? allvalue.description : 'Adicione uma nova despesa ou receita' } 
+                        {allvalue.description ? allvalue.description : 'Adicione uma nova despesa ou receita'} 
                       </TableCell>
                       <TableCell align="right"
                         className={allvalue.type ? classes.inflows : classes.outflows} >

@@ -5,8 +5,7 @@ const cors = require('cors');
 const routes = require('./routes');
 
 mongoose.connect(
-    process.env.MONGO_URL, 
-    {
+    process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,    
 });
