@@ -412,6 +412,8 @@ export default function EnhancedTable() {
 
                         <div className={classes.align} >{allvalue.date}</div>
                         <form
+                        id="trash"
+                        
                           onSubmit={(event) => handleDelete(event, allvalue)}>
 
                           <button
