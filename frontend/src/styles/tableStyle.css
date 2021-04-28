@@ -1,0 +1,7 @@
+#data-table {
+    border-spacing: 0 5px;
+}
+
+td, th  {
+    padding: 10px;
+}
