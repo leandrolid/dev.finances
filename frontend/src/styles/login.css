@@ -13,7 +13,7 @@ html, body, #root {
 }
 
 body {
-  background: rgb(19, 36, 19) url('../assets/home-background.jpeg') no-repeat fixed;
+  background: rgb(19, 36, 19) url('../assets/home-background.jpg') no-repeat fixed;
   background-position: center;
   background-size: cover;
   -webkit-font-smoothing: antialiased !important;
