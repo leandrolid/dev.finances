@@ -1,9 +1,12 @@
 # dev.finances
 
-[![GitHub issues](https://img.shields.io/github/issues/leandrolid/dev.finances)](https://github.com/leandrolid/dev.finances/issues)
-[![GitHub forks](https://img.shields.io/github/forks/leandrolid/dev.finances)](https://github.com/leandrolid/dev.finances/network)
-[![GitHub stars](https://img.shields.io/github/stars/leandrolid/dev.finances)](https://github.com/leandrolid/dev.finances/stargazers)
-[![GitHub license](https://img.shields.io/github/license/leandrolid/dev.finances)](https://github.com/leandrolid/dev.finances)
+<p>
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/leandrolid/dev.finances?color=6E40C9&style=flat-square">
+  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/leandrolid/dev.finances?color=6E40C9&style=flat-square">
+  <a href="https://github.com/leandrolid/dev.finances/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/leandrolid/dev.finances?color=6E40C9&style=flat-square">
+  </a>
+</p>
 
 <p>
 <img src="https://user-images.githubusercontent.com/61424755/106782466-f4664480-6628-11eb-846e-826cf6e9c1ff.jpg" alt="Webview" height="500px" />
@@ -12,6 +15,7 @@
 </p>
 
 ## Sobre 
-dev.finances é um simples organizador de finanças baseado na maratona Discover feita pela Rocketseat no mês de janeiro de 2021. O projeto foi feito utilizando Node.js no backend e React no frontend web.
+dev.finances é um simples organizador de finanças baseado na maratona Discover feita pela Rocketseat no mês de janeiro de 2021.
+A minha versão do projeto foi feito utilizando Node.js no backend, React no frontend web e para armazenamento dos dados, o MongoDB.
 
-> Você pode ver a aplicação sendo executada clicanco nesse [link](https://devfinances-leandro.herokuapp.com/)
+> Você pode ter um preview da aplicação clicanco nesse [link](https://devfinances-leandro.herokuapp.com/)
