@@ -18,4 +18,4 @@
 dev.finances é um simples organizador de finanças baseado na maratona Discover feita pela Rocketseat no mês de janeiro de 2021.
 A minha versão do projeto foi feito utilizando Node.js no backend, React no frontend web e para armazenamento dos dados, o MongoDB.
 
-> Você pode ter um preview da aplicação clicanco nesse [link](https://devfinances-leandro.herokuapp.com/)
+> Você pode ter um preview da aplicação clicanco nesse [link](https://devfinances-delta.vercel.app)
