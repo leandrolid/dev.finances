@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap');
+
+.container {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.contentDash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 850px;
+    width: 95%;
+    margin-top: 0px;
+}
+
+.headers {
+    max-width: 850px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;   
+    flex-wrap: wrap;
+    /* z-index: 100; */
+}
+
+#table-root {
+    z-index: 4;
+}
+
+.headerDash {
+    margin-top: -170px;
+    color: white;
+    text-shadow : 2px 2px 10px #0c201085;
+    cursor: default;
+}
+
+.headerDash a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#data-table {
+    border-spacing: 0 5px;
+}
+
+td, th  {
+    padding: 10px;
+}
+
+.incomes {
+    color: #1ba332;
+}
+
+.outcomes {
+    color: #db1d1d;
+}
+
+.modals {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.322);
+}
+
+/* .overlay{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+} */
+
+#trash{
+    width: fit-content;
+}
+
+@media screen and (max-width: 500px) {
+
+    .totals {
+        flex-direction: column;
+    }
+
+    .balanceItem {
+        max-width: 100%;
+        width: 100%;
+    }
+
+}

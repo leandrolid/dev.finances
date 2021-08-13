@@ -1,33 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
-
-* {
-  margin: 0;
-  padding: 0;
-  outline: 0;
-  box-sizing: border-box;
-}
-
-html, body, #root {
-  min-height: 100%;
-  
-}
-
-body {
-  background: rgb(19, 36, 19) url('../../assets/home-background.jpeg') no-repeat fixed;
-  background-position: center;
-  background-size: cover;
-  -webkit-font-smoothing: antialiased !important;
-}
-
-body, input, button {
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-}
-
 .container{
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px;
+  margin-top: 25px;
+  width: 100%;
+  max-width: 450px;
 }
 
 .inner {
@@ -39,9 +17,17 @@ body, input, button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -50px;
-  
+  position: relative;
 
+}
+
+.modalsClose{
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 15px;
+  z-index: 1;
 }
 
 header {
@@ -103,7 +89,9 @@ h1 {
    background-color: #08403A;
 }
 
-.container-modal{
+/* .containerModal{
   margin: 0px;
   margin-top: 25px;
-}
+  width: 100%;
+  max-width: 450px;
+} */

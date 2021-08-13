@@ -11,14 +11,13 @@ import {
 } from '@material-ui/core/';
 //import DeleteIcon from '@material-ui/icons/Delete';
 
-
 import api from '../services/api';
 
-import transactionButton from '../assets/transaction-button.svg'
 import EnhancedTableHead from './tableHead';
 import { EnhancedTableToolbar } from './tableToolbar';
 import { TransactionsContext } from '../contexts/transactionsContext';
-
+import transactionButton from '../assets/transaction-button.svg';
+import styles from '../styles/loading.module.css';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -133,6 +132,7 @@ export default function EnhancedTable() {
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [shoudDisplayRows, setShoudDisplayRows] = useState(true);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -151,85 +151,69 @@ export default function EnhancedTable() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const { tableUpdate, setTableUpdate } = useContext(TransactionsContext)
+  const { tableUpdate, setTableUpdate } = useContext(TransactionsContext);
 
-  const [incomes, setIncomes] = useState([]) //console.log(incomes)
-  const [outcomes, setOutcomes] = useState([]) //console.log(outcomes)
+  const [incomes, setIncomes] = useState([]); //console.log(incomes)
+  const [outcomes, setOutcomes] = useState([]); //console.log(outcomes)
 
   useEffect(() => {
     async function loadInflows() {
-      const user_id = localStorage.getItem('user')
+      const user_id = localStorage.getItem('user');
       const inflows = await api.get('/inflow', {
         headers: { user_id }
-      })
+      });
       setIncomes(inflows.data);
       //console.log(Infows.data)            
     }
-    loadInflows()
-  }, [tableUpdate])
+    loadInflows();
+  }, [tableUpdate]);
 
   useEffect(() => {
     async function loadOutflows() {
-      const user_id = localStorage.getItem('user')
+      const user_id = localStorage.getItem('user');
       const outflows = await api.get('/outflow', {
         headers: { user_id }
-      })
+      });
       setOutcomes(outflows.data);
-      //console.log(outfows.data)            
+      //console.log(outfows.data)
     }
-    loadOutflows()
-  }, [tableUpdate])
+    loadOutflows();
+  }, [tableUpdate]);
 
-  const allvalues = incomes.concat(outcomes)
+  const allvalues = incomes.concat(outcomes);
   //console.log(allvalues)
 
   let [transaction, setTransaction] = useState('');
 
   async function handleDelete(event, allvalue) {
+    event.preventDefault();
+    event.target.innerHTML = `<div class="${styles.loader}"></div>`;
 
-    event.preventDefault()
-
-    const filter = allvalue
-
-    let { _id } = allvalue
-
-    transaction = _id
-
-    console.log(transaction)
-    //console.log(filter)
-
+    const filter = allvalue;
+    let { _id } = allvalue;
+    transaction = _id;
     const added = incomes.map((income) => {
-      const inflow = income
-      return inflow
-
-    })
+      const inflow = income;
+      return inflow;
+    });
 
     if (added.indexOf(filter) > -1) { //console.log('teste 1')  
-
-      // console.log(filter)
-
-      await api.put('/inflow', { transaction })
-
-      //console.log({ transaction })
-      //console.log('entrada')
-      // window.location.reload(false);
-
-      setTableUpdate(tableUpdate + 1)
+      await api.put('/inflow', { transaction });
+      setTableUpdate(tableUpdate + 1);
 
     } else {
-
-      //const transaction = {transaction: transaction} 
-
-      await api.put('/outflow', { transaction })
-      //console.log({ transaction })
-      //console.log('saída')
-      setTableUpdate(tableUpdate + 1)
+      await api.put('/outflow', { transaction });
+      setTableUpdate(tableUpdate + 1);
     }
-
-
   }
 
-
+  useEffect(() => {
+    if (incomes.length > 0 || outcomes.length > 0) {
+      setShoudDisplayRows(true);
+    } else {
+      setShoudDisplayRows(false);
+    }
+  }, [incomes, outcomes]);
 
   return (
     <div className={classes.root} id="table-root" >
@@ -256,73 +240,108 @@ export default function EnhancedTable() {
               rowCount={allvalues.length}
               className={classes.tableHeader}
             />
-            <TableBody>
-              {stableSort(allvalues, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((allvalue) => {
-
-                  const isItemSelected = isSelected(allvalue._id);
-                  const labelId = allvalue._id
-
-
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={allvalue._id}
-                      selected={isItemSelected}
-                      className={classes.lines}
-
-                      value={allvalue._id}
-
-                    //onClick={(event) => handleClick(event, allvalue._id)}
-
-
-
-                    >
-
-                      <TableCell
-                        component="th" id={labelId}
-                        scope="row"
-                        padding="default"
-                        className={classes.align}
-                      >
-                        {allvalue.description ? allvalue.description : 'Adicione uma nova despesa ou receita'}
-                      </TableCell>
-                      <TableCell align="right"
-                        className={allvalue.type ? classes.inflows : classes.outflows} >
-                        {allvalue.type ? null : '-'}
-                        R$ {allvalue.price},00</TableCell>
-                      <TableCell align="right" className={classes.date} >
-
-                        <div className={classes.align} >{allvalue.date}</div>
-                        <form
-                          id="trash"
-
-                          onSubmit={(event) => handleDelete(event, allvalue)}>
-
-                          <button
-                            id={allvalue._id}
+            {
+              shoudDisplayRows
+                ? (
+                  <TableBody>
+                    {stableSort(allvalues, getComparator(order, orderBy))
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((allvalue) => {
+                        const isItemSelected = isSelected(allvalue._id);
+                        const labelId = allvalue._id;
+                        return (
+                          <TableRow
+                            hover
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            key={allvalue._id}
+                            selected={isItemSelected}
+                            className={classes.lines}
                             value={allvalue._id}
-                            onClick={event => setTransaction(event.target.value)}
-                            className={classes.delete}
+                          //onClick={(event) => handleClick(event, allvalue._id)}
                           >
-                            <img src={transactionButton}
-                              alt="Remover"
-                              className={classes.transactionButton} />
-                          </button>
 
-                        </form>
+                            <TableCell
+                              component="td" id={labelId}
+                              scope="row"
+                              padding="default"
+                              className={classes.align}
+                            >
+                              {allvalue.description ? allvalue.description : 'Adicione uma nova despesa ou receita'}
+                            </TableCell>
+                            <TableCell
+                              align="right"
+                              className={allvalue.type ? classes.inflows : classes.outflows}
+                            >
+                              {allvalue.type ? null : '-'}
+                              {allvalue.price
+                                ? allvalue.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                                : 'R$ 0,00'
+                              }
+                            </TableCell>
+                            <TableCell align="right" className={classes.date} >
+
+                              <div className={classes.align} >{allvalue.date}</div>
+                              <form
+                                id="trash"
+                                onSubmit={(event) => handleDelete(event, allvalue)}>
+                                <button
+                                  id={allvalue._id}
+                                  value={allvalue._id}
+                                  onClick={event => setTransaction(event.target.value)}
+                                  className={classes.delete}
+                                >
+                                  <img
+                                    src={transactionButton}
+                                    alt="Remover"
+                                    className={classes.transactionButton}
+                                  />
+                                </button>
+
+                              </form>
 
 
-                      </TableCell>
+                            </TableCell>
 
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
+                          </TableRow>
+                        );
+                      })}
+                  </TableBody>
+                )
+                : (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    className={classes.lines}
+                  //onClick={(event) => handleClick(event, allvalue._id)}
+                  >
+
+                    <TableCell
+                      component="td"
+                      scope="row"
+                      padding="default"
+                      className={classes.align}
+                    />
+                    <TableCell
+                      component="td"
+                      scope="row"
+                      padding="default"
+                      className={classes.align}
+                    >
+                      Ainda não há transações por aqui.
+                    </TableCell>
+                    <TableCell
+                      component="td"
+                      scope="row"
+                      padding="default"
+                      className={classes.align}
+                    />
+                  </TableRow>
+                )
+            }
+
           </Table>
         </TableContainer>
         <TablePagination

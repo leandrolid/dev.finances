@@ -1,7 +1,8 @@
 import React from 'react'
-import { TransactionsProvider } from './contexts/transactionsContext'
 
+import { TransactionsProvider } from './contexts/transactionsContext'
 import Routes from './routes'
+import './styles/globals.css'
 
 function App() {
   return (
